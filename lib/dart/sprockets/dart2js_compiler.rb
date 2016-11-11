@@ -21,7 +21,7 @@ module Dart
     def self.call(input)
       # it's necessary for dart2js to have the dart file in th same directory as its depencencies
       compiler = ::Dart2Js.new(input[:data], pwd: File.dirname(input[:filename]))
-      result = compiler.compile
+      result = compiler.compile(true, (Pathname.new(input[:filename]).parent + '.packages').to_s)
       compiler.close
       result
     end
